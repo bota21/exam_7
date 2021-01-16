@@ -1,0 +1,32 @@
+import { React } from 'react';
+import s from './ProductList.module.css';
+import List from './List/List';
+
+const ProductList = props => {
+    return (
+        <div className={s.product_list}>
+            <div className={s.title_wrapper}>
+                <div className={s.title}>Title
+                <span className={s.triangle_up}></span>
+                </div>
+                <div className={s.price}>Price $
+                <div className={s.triangle_wrapper}>
+                <span className={s.triangle_up}></span>
+                <span className={s.triangle_down}></span>
+                </div>                
+                </div>
+                <div className={s.stock}>Stock
+                <span className={s.triangle_down}></span>
+                </div>
+            </div>
+            <div className={s.list_wrapper}>
+            <List 
+            title={props.title} price={props.price} stock={props.stock} onReduce={props.onReduce}
+            />
+            </div>
+           
+        </div>
+    )
+};
+
+export default ProductList;

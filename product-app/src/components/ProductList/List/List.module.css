@@ -1,0 +1,30 @@
+.list{
+    display: grid;
+    grid-template-columns: 500px 150px 150px;
+    grid-template-rows: repeat(1fr);
+}
+.title, .stock{
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+}
+.title, .price, .stock{
+    text-align: start;
+    padding: 5px 10px;
+}
+.list:nth-child(odd){
+    background: rgb(250, 245, 245);
+}
+.stock{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    align-items: center;
+}
+.reduce{
+    display: inline-block;
+    width: 10px;
+    height: 3px;
+    background: #000;
+    cursor: pointer;
+    
+}
