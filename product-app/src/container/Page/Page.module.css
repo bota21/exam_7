@@ -14,3 +14,9 @@
     border-top: 2px solid #000;
     border-bottom: 2px solid #000;
 }
+.empty{
+    width: 80%;
+    padding: 20px;
+    background: #ccc;
+    margin: 30px auto;
+}

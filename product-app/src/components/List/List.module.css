@@ -3,6 +3,9 @@
     grid-template-columns: 500px 150px 150px;
     grid-template-rows: repeat(1fr);
 }
+.title{
+    text-transform: uppercase;
+}
 .title, .stock{
     border-left: 2px solid #000;
     border-right: 2px solid #000;
