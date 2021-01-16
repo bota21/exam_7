@@ -1,8 +1,7 @@
 import { React } from 'react';
 import s from './ProductList.module.css';
-import List from './List/List';
 
-const ProductList = props => {
+const ProductList = () => {
     return (
         <div className={s.product_list}>
             <div className={s.title_wrapper}>
@@ -18,13 +17,7 @@ const ProductList = props => {
                 <div className={s.stock}>Stock
                 <span className={s.triangle_down}></span>
                 </div>
-            </div>
-            <div className={s.list_wrapper}>
-            <List 
-            title={props.title} price={props.price} stock={props.stock} onReduce={props.onReduce}
-            />
-            </div>
-           
+            </div>           
         </div>
     )
 };
