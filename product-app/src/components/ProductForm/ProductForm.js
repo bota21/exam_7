@@ -1,7 +1,7 @@
 import { React } from 'react';
 import s from './ProductForm.module.css';
 
-const Form = props => {
+const ProductForm = props => {
     return (
         <form>
         <div className={s.form}>
@@ -12,11 +12,11 @@ const Form = props => {
         onChange={props.changeName} value={props.valueName}
         />
         <input 
-        type="number" className={s.input_price} placeholder='Price'
+        type="text" className={s.input_price} placeholder='Price'
         onChange={props.changePrice} value={props.valuePrice}
         />
         <input 
-        type="number" className={s.input_stock} placeholder='Stock availability'
+        type="text" className={s.input_stock} placeholder='Stock availability'
         onChange={props.changeStock} value={props.valueStock}
         />
         </div>
@@ -29,4 +29,4 @@ const Form = props => {
         </form>
         )
     };
-    export default Form
+    export default ProductForm
