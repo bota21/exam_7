@@ -40,78 +40,85 @@ const Page = () => {
     let reduceStock = id => {
         let index = product.findIndex(i => i.id === id);
         let copyProduct = [...product];
-        if(copyProduct[index].stock === 0) return ;
+        if(copyProduct[index].stock === 0) return;
         copyProduct[index].stock--;
         setProduct(copyProduct)
     }
-    let addData = (e) => {
+    let addData = (e, id) => {
         e.preventDefault();
         let copyProduct = [...product];
-        product.map(i => {
-            if(data[-1].name === i.name) {
-                i.price = data[-1].price            
-                i.stock += data[-1].stock            
-            } 
+        copyProduct.push({id: uuidv4(), 
+            name: data[-1].name, 
+            price: data[-1].price, 
+            stock: data[-1].stock}
+            ); 
+            product.map(i => {
+                if(i.name === data[-1].name){ 
+                    i.price = data[-1].price;
+                    i.stock += data[-1].stock
+                } 
+            })
+            setProduct(copyProduct)
+        };
+        if(product.length === 0) return <h3 className={s.empty}>No products available</h3>
+        
+        let sortNameUp = () => {
+            let copyProduct = [...product];
+            copyProduct.sort((a, b) => {return (a.name > b.name) ? 1: -1});
+            setProduct(copyProduct)
+        };
+        let sortNameDown = () => {
+            let copyProduct = [...product];
+            copyProduct.sort((a, b) => {return (a.name < b.name) ? 1: -1});
+            setProduct(copyProduct)
+        };
+        let sortPriceUp = () => {
+            let copyProduct = [...product];
+            copyProduct.sort((a, b) => {return (a.price > b.price) ? 1: -1});
+            setProduct(copyProduct)
+        };
+        let sortPriceDown = () => {
+            let copyProduct = [...product];
+            copyProduct.sort((a, b) => {return (a.price < b.price) ? 1: -1});
+            setProduct(copyProduct)
+        };
+        let sortStockUp = () => {
+            let copyProduct = [...product];
+            copyProduct.sort((a, b) => {return (a.stock > b.stock) ? 1: -1});
+            setProduct(copyProduct)
+        };
+        let sortStockDown = () => {
+            let copyProduct = [...product];
+            copyProduct.sort((a, b) => {return (a.stock < b.stock) ? 1: -1});
+            setProduct(copyProduct)
+        };
+        let addProductList = product.map(item => {
+            return <List 
+            key={item.id}
+            title={item.name}
+            price={item.price}
+            stock={item.stock}
+            onReduce={() => reduceStock(item.id)}
+            />
         });
-        setProduct(copyProduct)
-    };
-    if(product.length === 0) return <h3 className={s.empty}>No products available</h3>
-    
-    let addProductList = product.map(item => {
-        return <List 
-        key={item.id}
-        title={item.name}
-        price={item.price}
-        stock={item.stock}
-        onReduce={() => reduceStock(item.id)}
-        />
-    });
-    let sortNameUp = () => {
-        let copyProduct = [...product];
-        copyProduct.sort((a, b) => {return (a.name > b.name) ? 1: -1});
-        setProduct(copyProduct)
-    };
-    let sortNameDown = () => {
-        let copyProduct = [...product];
-        copyProduct.sort((a, b) => {return (a.name < b.name) ? 1: -1});
-        setProduct(copyProduct)
-    };
-    let sortPriceUp = () => {
-        let copyProduct = [...product];
-        copyProduct.sort((a, b) => {return (a.price > b.price) ? 1: -1});
-        setProduct(copyProduct)
-    };
-    let sortPriceDown = () => {
-        let copyProduct = [...product];
-        copyProduct.sort((a, b) => {return (a.price < b.price) ? 1: -1});
-        setProduct(copyProduct)
-    };
-    let sortStockUp = () => {
-        let copyProduct = [...product];
-        copyProduct.sort((a, b) => {return (a.stock > b.stock) ? 1: -1});
-        setProduct(copyProduct)
-    };
-    let sortStockDown = () => {
-        let copyProduct = [...product];
-        copyProduct.sort((a, b) => {return (a.stock < b.stock) ? 1: -1});
-        setProduct(copyProduct)
-    };
-    return (
-        <div className={s.page}>
-        <div className={s.wrapper}>
-        <ProductList sortNameUp={sortNameUp} sortNameDown={sortNameDown} 
-        sortPriceUp={sortPriceUp} sortPriceDown={sortPriceDown}  
-        sortStockUp={sortStockUp} sortStockDown={sortStockDown}/>
-        {addProductList}
-        </div>
-        <div className={s.line}></div>
-        <ProductForm 
-        changeName={currentName}
-        changePrice={currentPrice}
-        changeStock={currentStock}
-        onSubmit={(e) => addData(e)}
-        />
-        </div>
-        )
-    }
-    export default Page;
+        return (
+            <div className={s.page}>
+            <div className={s.wrapper}>
+            <ProductList
+            sortNameUp={sortNameUp} sortNameDown={sortNameDown} 
+            sortPriceUp={sortPriceUp} sortPriceDown={sortPriceDown}  
+            sortStockUp={sortStockUp} sortStockDown={sortStockDown}
+            />
+            {addProductList}
+            </div>
+            <div className={s.line}></div>
+            <ProductForm 
+            changeName={currentName}
+            changePrice={currentPrice}
+            changeStock={currentStock}
+            onSubmit={(e) => addData(e)}
+            />
+            </div>
+            )
+        }
+        export default Page;
